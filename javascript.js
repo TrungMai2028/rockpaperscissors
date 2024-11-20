@@ -24,7 +24,7 @@ function getComputer(){
 //get human choice
 function getHuman(){
     //prompt user to type in
-    let choice = prompt("Enter Rock, Paper, or Scissors:");
+    return choice = prompt("Enter Rock, Paper, or Scissors:");
 }
 
 //write logic to play a single round
@@ -43,10 +43,14 @@ function playRound(humanChoice, computerChoice){
     }
 }
 
-const humanSelection = getHuman();
-const computerSelection = getComputer();
 
-console.log(humanSelection);
-console.log(computerSelection);
 
-playRound(humanSelection, computerSelection);
+for (let i = 0; i < 5; i++){
+    const humanSelection = getHuman();
+    const computerSelection = getComputer();
+
+    console.log(humanSelection);
+    console.log(computerSelection);
+
+    playRound(humanSelection, computerSelection);
+}
