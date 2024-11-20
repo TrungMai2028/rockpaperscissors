@@ -24,7 +24,7 @@ function getComputer(){
 //get human choice
 function getHuman(){
     //prompt user to type in
-    return prompt("Enter your choice: ");
+    let choice = prompt("Enter Rock, Paper, or Scissors:");
 }
 
 //write logic to play a single round
@@ -32,9 +32,9 @@ function playRound(humanChoice, computerChoice){
     if (humanChoice.toLowerCase() == computerChoice.toLowerCase()){
         console.log("Draw");
     }
-    else if (humanChoice.toLowerCase() == "rock" && computerChoice.toLowerCase() == "scissors" ||
-    humanChoice.toLowerCase() == "paper" && computerChoice.toLowerCase() == "rock" || 
-    humanChoice.toLowerCase() == "scissors" && computerChoice.toLowerCase() == "paper")
+    else if (humanChoice.toLowerCase() === "Rock" && computerChoice.toLowerCase() === "Scissors" ||
+    humanChoice.toLowerCase() === "Paper" && computerChoice.toLowerCase() === "Rock" || 
+    humanChoice.toLowerCase() === "Scissors" && computerChoice.toLowerCase() === "Paper")
     {
         console.log("You win! " + humanChoice + " beats " + computerChoice);
     }
