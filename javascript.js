@@ -7,6 +7,10 @@ function getComputerChoice(){
 let humanScore = 0;
 let computerScore = 0;
 
+const resultDiv = document.createElement("div");
+resultDiv.id = "result";
+document.body.appendChild(resultDiv);
+
 //get computer choice
 function getComputer(){
     let x = getComputerChoice();
@@ -23,39 +27,61 @@ function getComputer(){
 
 //get human choice
 function getHuman(){
-    //prompt user to type in
-    return choice = prompt("Enter Rock, Paper, or Scissors:");
+    const btns = document.querySelectorAll("button");
+    btns.forEach(btn => {
+        btn.addEventListener("click", (event) => {
+            const humanChoice = event.target.textContent;
+            const computerChoice = getComputer();
+            playRound(humanChoice, computerChoice); 
+        });
+    });
 }
 
 //write logic to play a single round
 function playRound(humanChoice, computerChoice){
+    let resultMessage = "";
+
     if (humanChoice.toLowerCase() == computerChoice.toLowerCase()){
-        console.log("Draw");
+        resultMessage = "Draw!";
     }
-    else if (humanChoice.toLowerCase() === "Rock" && computerChoice.toLowerCase() === "Scissors" ||
-    humanChoice.toLowerCase() === "Paper" && computerChoice.toLowerCase() === "Rock" || 
-    humanChoice.toLowerCase() === "Scissors" && computerChoice.toLowerCase() === "Paper")
+    else if (humanChoice.toLowerCase() === "rock" && computerChoice.toLowerCase() === "scissors" ||
+    humanChoice.toLowerCase() === "paper" && computerChoice.toLowerCase() === "rock" || 
+    humanChoice.toLowerCase() === "scissors" && computerChoice.toLowerCase() === "paper")
     {
-        console.log("You win! " + humanChoice + " beats " + computerChoice);
+        resultMessage = `You win! ${humanChoice} beats ${computerChoice}`;
         humanScore++;
     }
     else{
-        console.log("You lose! " + computerChoice + " beats " + humanChoice);
+        resultMessage = `You lose! ${computerChoice} beats ${humanChoice}`;
         computerScore++;
     }
+
+    if (humanScore == 5){
+        resultDiv.innerHTML = `
+        <p>You are the winner!</p>
+        <p>Human Score: ${humanScore}</p>
+        <p>Computer Score: ${computerScore}</p> 
+        `;
+    }
+    else if (computerScore == 5) {
+        resultDiv.innerHTML = `
+        <p>Computer is the winner!</p>
+        <p>Human Score: ${humanScore}</p>
+        <p>Computer Score: ${computerScore}</p> 
+        `;
+    }
+    else{
+        resultDiv.innerHTML = `
+        <p>${resultMessage}</p>
+        <p>Human Score: ${humanScore}</p>
+        <p>Computer Score: ${computerScore}</p>
+        `;
+    }
+
+    
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    getHuman();
+});
 
-
-for (let i = 0; i < 5; i++){
-    const humanSelection = getHuman();
-    const computerSelection = getComputer();
-
-    console.log(humanSelection);
-    console.log(computerSelection);
-
-    playRound(humanSelection, computerSelection);
-}
-
-console.log("Human Score: " + humanScore);
-console.log("Computer Score: " + computerScore);
